@@ -25,18 +25,26 @@ sendBtn.addEventListener("click", () => {
 
     welcome.style.display = "none";
 
+    // User Message
     const userMessage = document.createElement("div");
-
     userMessage.className = "message user-message";
-
     userMessage.textContent = message;
-
     chatBox.appendChild(userMessage);
 
     textarea.value = "";
-
     textarea.style.height = "58px";
 
+    // AI Placeholder
+    const aiMessage = document.createElement("div");
+    aiMessage.className = "message ai-message";
+    aiMessage.textContent = "Thinking...";
+    chatBox.appendChild(aiMessage);
+
     chatBox.scrollTop = chatBox.scrollHeight;
+
+    setTimeout(() => {
+        aiMessage.textContent = "This is a temporary AI response.";
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }, 1000);
 
 });
