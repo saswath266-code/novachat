@@ -136,3 +136,22 @@ textarea::placeholder {
 .input-area button:hover {
     background: #2ea043;
 }
+
+.message {
+    max-width: 75%;
+    padding: 15px 18px;
+    margin-bottom: 15px;
+    border-radius: 18px;
+    line-height: 1.6;
+    word-wrap: break-word;
+}
+
+.user-message {
+    background: #238636;
+    margin-left: auto;
+}
+
+.ai-message {
+    background: #21262d;
+    margin-right: auto;
+}
