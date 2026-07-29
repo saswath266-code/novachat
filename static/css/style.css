@@ -112,6 +112,10 @@ textarea {
     font-size: 16px;
     background: #161b22;
     color: white;
+    min-height: 58px;
+    max-height: 180px;
+    overflow-y: auto;
+    line-height: 1.5;
 }
 
 textarea::placeholder {
