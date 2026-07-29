@@ -17,7 +17,7 @@ textarea.addEventListener("keydown", (event) => {
 
 });
 
-sendBtn.addEventListener("click", () => {
+sendBtn.addEventListener("click", async () => {
 
     const message = textarea.value.trim();
 
@@ -25,7 +25,6 @@ sendBtn.addEventListener("click", () => {
 
     welcome.style.display = "none";
 
-    // User Message
     const userMessage = document.createElement("div");
     userMessage.className = "message user-message";
     userMessage.textContent = message;
@@ -34,7 +33,6 @@ sendBtn.addEventListener("click", () => {
     textarea.value = "";
     textarea.style.height = "58px";
 
-    // AI Placeholder
     const aiMessage = document.createElement("div");
     aiMessage.className = "message ai-message";
     aiMessage.textContent = "Thinking...";
@@ -42,9 +40,27 @@ sendBtn.addEventListener("click", () => {
 
     chatBox.scrollTop = chatBox.scrollHeight;
 
-    setTimeout(() => {
-        aiMessage.textContent = "This is a temporary AI response.";
-        chatBox.scrollTop = chatBox.scrollHeight;
-    }, 1000);
+    try {
+
+        const response = await fetch("/chat", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                message: message
+            })
+        });
+
+        const data = await response.json();
+
+        aiMessage.textContent = data.response;
+
+    } catch (error) {
+    console.error(error);
+    aiMessage.textContent = error.message;
+}
+
+    chatBox.scrollTop = chatBox.scrollHeight;
 
 });
