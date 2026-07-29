@@ -1,18 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NovaChat</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
 <body>
 
-    <h1>🚀 Welcome to NovaChat</h1>
+    <div class="container">
 
-    <p>Your AI Assistant is under development.</p>
+        <aside class="sidebar">
+            <button class="new-chat-btn">+ New Chat</button>
+
+            <div class="chat-history">
+                <!-- Chat history will come here -->
+            </div>
+        </aside>
+
+        <main class="chat-section">
+
+            <div class="chat-header">
+                <h2>NovaChat</h2>
+            </div>
+
+            <div class="chat-box">
+
+                <div class="welcome">
+                    <h1>Welcome to NovaChat</h1>
+                    <p>Your AI Assistant powered by Gemini.</p>
+                </div>
+
+            </div>
+
+            <div class="input-area">
+                <textarea
+                    placeholder="Ask anything..."
+                    rows="1"></textarea>
+
+                <button>Send</button>
+            </div>
+
+        </main>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
 </body>
-
 </html>
