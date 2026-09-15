@@ -14,14 +14,22 @@ def home():
 def chat():
 
     data = request.get_json()
+    user_message = data.get("message")
 
-    user_message = data["message"]
+    try:
+        ai_response = generate_response(user_message)
 
-    ai_response = generate_response(user_message)
+        return jsonify({
+            "response": ai_response
+        })
 
-    return jsonify({
-        "response": ai_response
-    })
+    except Exception as e:
+        print("Gemini error:", e)
+
+        return jsonify({
+            "error": "AI service is temporarily unavailable. Please try again."
+        }), 503
+
 
 
 if __name__ == "__main__":
