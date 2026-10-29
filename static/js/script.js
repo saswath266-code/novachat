@@ -40,26 +40,39 @@ sendBtn.addEventListener("click", async () => {
 
     chatBox.scrollTop = chatBox.scrollHeight;
 
-    try {
+    
+try {
+    const response = await fetch("/chat", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            message: message
+        })
+    });
 
-        const response = await fetch("/chat", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                message: message
-            })
-        });
+    const data = await response.json().catch(() => ({}));
 
-        const data = await response.json();
+    if (!response.ok) {
+        throw new Error(
+            data.error || `Server error (${response.status})`
+        );
+    }
 
-        aiMessage.textContent = data.response;
+    if (!data.response) {
+        throw new Error("The AI returned an empty response.");
+    }
 
-    } catch (error) {
-    console.error(error);
-    aiMessage.textContent = error.message;
+    aiMessage.textContent = data.response;
+
+} catch (error) {
+    console.error("Chat request failed:", error);
+
+    aiMessage.textContent =
+        `Unable to get a reply: ${error.message}`;
 }
+
 
     chatBox.scrollTop = chatBox.scrollHeight;
 
