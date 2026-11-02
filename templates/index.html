@@ -3,51 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NovaChat, an AI assistant powered by Gemini.">
     <title>NovaChat</title>
-
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-
 <body>
-
     <div class="container">
-
-        <aside class="sidebar">
-            <button class="new-chat-btn">+ New Chat</button>
-
-            <div class="chat-history">
-                <!-- Chat history will come here -->
-            </div>
+        <aside class="sidebar" aria-label="Chat controls">
+            <button class="new-chat-btn" id="newChatButton" type="button">+ New Chat</button>
+            <p class="sidebar-hint">Messages stay in this browser tab until you start a new chat.</p>
         </aside>
 
         <main class="chat-section">
+            <header class="chat-header">
+                <h1>🚀 NovaChat</h1>
+            </header>
 
-            <div class="chat-header">
-                <h2>🚀 NovaChat</h2>
-            </div>
-
-            <div class="chat-box" id="chatBox">
-
+            <div class="chat-box" id="chatBox" aria-live="polite" aria-busy="false">
                 <div class="welcome" id="welcome">
-                    <h1>Welcome to NovaChat</h1>
-                    <p>Your AI Assistant powered by Gemini.</p>
+                    <h2>Welcome to NovaChat</h2>
+                    <p>Your AI assistant powered by Gemini.</p>
                 </div>
-
             </div>
 
-            <div class="input-area">
+            <form class="input-area" id="chatForm">
+                <label class="sr-only" for="messageInput">Your message</label>
                 <textarea
+                    id="messageInput"
                     placeholder="Ask anything..."
-                    rows="1"></textarea>
-
-                <button>Send</button>
-            </div>
-
+                    rows="1"
+                    maxlength="12000"
+                    required
+                ></textarea>
+                <button id="sendButton" type="submit">Send</button>
+            </form>
         </main>
-
     </div>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-
 </body>
 </html>
